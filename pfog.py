@@ -26,6 +26,17 @@ class Grammar:
                 break
         return sentence
 
+pattern = "(?:and|or|not)(.+)"
+
+def fix_parentheses(expression):
+    r, l = expression.count(")"), expression.count("(")
+    if r < l:
+        return expression.replace("(", "", l-r)
+    elif l < r:
+        return expression.replace(")", "", r-l)
+    else:
+        return expression
+
 g = Grammar(
         axiom="S",
         terminals=["a", "b", "c"],
